@@ -1,0 +1,31 @@
+{
+  "name": "envelope-qr-bot",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Bot Telegram QR Generator énvelope di Cloudflare Workers + Telegram Mini App",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild miniapp/app.ts --bundle --minify --format=iife --target=es2019 --outfile=public/app.js",
+    "typecheck": "tsc -p tsconfig.worker.json && tsc -p tsconfig.app.json",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "db:init": "wrangler d1 execute qr-bot --remote --file=schema.sql",
+    "db:init:local": "wrangler d1 execute qr-bot --local --file=schema.sql",
+    "setup": "node scripts/setup-telegram.mjs"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "jsqr": "^1.4.0",
+    "qrcode-generator": "^2.0.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261112.1",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.160.1"
+  },
+  "allowScripts": {
+    "workerd@1.20261110.1": true,
+    "esbuild@0.28.2": true
+  }
+}

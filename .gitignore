@@ -1,0 +1,13 @@
+# Rahasia: jangan pernah di-commit
+.env
+**/.dev.vars
+
+# Lingkungan & hasil build (dibuat ulang dengan npm install / npm run build)
+venv/
+__pycache__/
+node_modules/
+.wrangler/
+cloudflare/public/app.js
+
+# Pengaturan lokal editor & Claude
+.claude/

@@ -1,0 +1,35 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "envelope-qr-bot",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-11-01",
+
+  // Halaman Mini App (public/) dilayani langsung oleh Worker yang sama.
+  // Path yang tidak cocok dengan file statis (/telegram, /api/*) diteruskan ke kode Worker.
+  "assets": {
+    "directory": "./public"
+  },
+
+  // Penyimpanan state chat & job QR.
+  // database_id diisi setelah menjalankan: npx wrangler d1 create qr-bot
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "qr-bot",
+      "database_id": "a44c2203-7916-4900-a578-f325095f3f77"
+    }
+  ],
+
+  // Bersihkan session & job lama setiap hari jam 03:00 UTC.
+  "triggers": {
+    "crons": ["0 3 * * *"]
+  },
+
+  "observability": {
+    "enabled": true
+  }
+
+  // Secret (diset lewat `wrangler secret put`, bukan di file ini):
+  //   BOT_TOKEN       token bot dari BotFather
+  //   WEBHOOK_SECRET  string acak untuk memverifikasi request dari Telegram
+}
