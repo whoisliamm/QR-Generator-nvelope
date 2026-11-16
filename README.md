@@ -78,24 +78,6 @@
   <img src="docs/cara-kerja.webp" alt="Cara kerja: Telegram membuka QR Generator (Mini App) yang membuat QR di perangkat pengguna, lalu file QR dikirim ke chat. Didukung Cek scan, Cloudflare Worker, dan D1 Database." width="900">
 </p>
 
-Alur membuat QR dari chat:
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor T as Tim énvelope
-    participant B as Bot (Worker)
-    participant M as Mini App
-
-    T->>B: Tempel URL di chat
-    B-->>T: Tombol "Buka form yang sudah terisi"
-    T->>M: Buka form, atur format dan tampilan
-    M->>M: Buat QR, lalu baca ulang (cek scan)
-    M->>B: Kirim file + tanda tangan Telegram
-    B->>B: Cek tanda tangan dan akses tim
-    B-->>T: File QR masuk ke chat
-```
-
 **Kenapa QR dibuat di perangkat pengguna?** Paket gratis Cloudflare hanya memberi sekitar 10 ms CPU
 per permintaan, tidak cukup untuk membuat PNG 4000 px atau 50 QR sekaligus. Dengan membuat QR di
 Mini App, server cukup menyimpan data dan meneruskan file, jadi bot tetap gratis dan berjalan 24 jam.
