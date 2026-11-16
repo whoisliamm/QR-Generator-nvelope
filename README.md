@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="telegram-profile/gambar-deskripsi.png" alt="énvelope QR Generator" width="420">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/header-dark.png">
+    <img src="docs/header-light.png" alt="énvelope QR Generator" width="420">
+  </picture>
 </p>
 
 <p align="center">
