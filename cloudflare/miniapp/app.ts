@@ -1286,6 +1286,8 @@ function startPreviewMode(initial: string) {
   bar.className = "preview-bar";
   bar.setAttribute("aria-label", "Preview layar");
   document.body.prepend(bar);
+  // ?bar=0 menyembunyikan bar ini, untuk mengambil screenshot dokumentasi
+  bar.hidden = params.get("bar") === "0";
 
   let state = initial in PREVIEW_STATES ? initial : "form";
   let theme = params.get("theme") ?? "auto";
